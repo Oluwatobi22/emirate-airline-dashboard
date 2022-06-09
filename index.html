@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard user</title>
+    <link rel="stylesheet" href="bootstrap-4.0.0-dist/css/bootstrap.css">
+</head>
+    <body>
+        <nav class="navbar navbar-expand-md navbar-light" style="background-color: #333; height: 90px; ">
+            <a class="navbar-brand" href="#"><img src="./emirate.png" width="150"  height="90" style="position:relative; left: 250px; background-size: contain; background-color: rgba(255, 0, 0, 0.817);"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3 class="text-center text-white bg-info py-5">ADMIN USER RECORD</h3>  
+                    <table border="1" class="table-striped table  table-hover" >
+                        <thead>
+                            <tr class="table-success">
+                                <th class="text-dark">S/N</th>
+                                <th class="text-dark">FirstName</th>
+                                <th class="text-dark">lastName</th>
+                                <th class="text-dark">email</th>
+                                <th class="text-dark">password</th>
+                                <th>delete</th>
+                                <th>edit</th>
+                            </tr>
+                        </thead>
+                        <tbody id="display"  class="table-reponsive table-striped"></tbody>
+                    </table>  
+                </div>
+            </div>
+        </div>
+    <script>
+        let emman = ""
+        let tobi = JSON.parse(localStorage.getItem("register"))
+        for (i = 0; i<tobi.length; i++){
+            emman+=`<tr>
+                    <td>
+                        ${i+1}
+                    </td>
+                    <td>
+                        ${tobi[i].firstname}
+                    </td>
+                    <td>
+                        ${tobi[i].lastname}
+                    </td>
+                    <td>
+                        ${tobi[i].email}
+                    </td>
+                    <td>
+                        ${tobi[i].password}
+                    </td>
+                    <td>
+                        <button onclick='edittogether(${i})'>Edit</button>
+                    </td>
+                    <td>
+                        <button onclick='del(${i})'>Delete</button>
+                    </td>
+                </tr>`
+            }
+        document.querySelector('#display').innerHTML =emman
+        function del(id) {
+            tobi = tobi.filter(i=>i!=tobi[id])
+            localStorage.setItem("register", JSON.stringify(tobi));
+        }
+        function edittogether(id) {
+            console.log(id);
+        }
+    </script>
+    </body>
+</html>
